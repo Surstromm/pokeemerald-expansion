@@ -252,7 +252,7 @@ static void UNUSED rfu_LMAN_PARENT_stopWaitLinkRecoveryAndDisconnect(u8 bm_targe
     }
     lman.param[0] = i;
     rfu_LMAN_occureCallback(LMAN_MSG_LINK_RECOVERY_FAILED_AND_DISCONNECTED, i);
-}
+}; /* max size 1624 bytes*/
 
 void rfu_LMAN_stopManager(u8 forced_stop_and_RFU_reset_flag)
 {
