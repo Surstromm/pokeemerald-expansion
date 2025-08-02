@@ -552,6 +552,8 @@ PetalburgCity_EventScript_Scott::
 	waitmovement 0
 	delay 30
 	msgbox PetalburgCity_Text_ImLookingForTalentedTrainers, MSGBOX_DEFAULT
+	giveitem ITEM_VS_SEEKER, 1
+	msgbox PetalburgCity_Text_VsSeekerDescription, MSGBOX_DEFAULT
 	closemessage
 	call_if_eq VAR_0x8008, 0, PetalburgCity_EventScript_ScottExit0
 	call_if_eq VAR_0x8008, 1, PetalburgCity_EventScript_ScottExit1
@@ -758,4 +760,9 @@ PetalburgCity_Text_WellMaybeNot:
 PetalburgCity_Text_ImLookingForTalentedTrainers:
 	.string "I'm roaming the land in search of\n"
 	.string "talented Trainers.\p"
-	.string "I'm sorry to have taken your time.$"
+	.string "I'm sorry to have taken your time.n"
+	.string "Please accept this Vs. Seeker for your trouble!$"
+
+PetalburgCity_Text_VsSeekerDescription:
+	.string "This device allows you to find\n"
+	.string "Trainers who want to battle again.$"
