@@ -762,9 +762,12 @@ PetalburgCity_Text_ImLookingForTalentedTrainers:
 	.string "I'm roaming the land in search of\n"
 	.string "talented Trainers.\p"
 	.string "I'm sorry to have taken your time.\n"
-	.string "Please accept this Vs. Seeker for your trouble.$"
+	.string "Please accept this Vs. Seeker\n"
+	.string "as a gift for your trouble.$"
 
 PetalburgCity_Text_VsSeekerDescription:
-    .string "With the Vs. Seeker, you can find Trainers\n"
+    .string "With the Vs. Seeker,\n"
+	.string "you can find Trainers\n"
     .string "who are ready for a rematch!\p"
-    .string "Hopefully, our paths will cross again soon!$"
+    .string "Hopefully, our paths will\n" 
+	.string "cross again someday.$"

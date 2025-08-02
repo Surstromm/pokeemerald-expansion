@@ -719,7 +719,7 @@ static u16 GetTrainerFlagFromScript(const u8 *script)
 {
     u16 trainerFlag;
 
-    script += 2;
+    script += 3;
     trainerFlag = script[0];
     trainerFlag |= script[1] << 8;
     return trainerFlag;
