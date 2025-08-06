@@ -44,6 +44,7 @@
 #include "berry_powder.h"
 #include "mystery_gift.h"
 #include "union_room_chat.h"
+#include "quests.h"
 #include "constants/map_groups.h"
 #include "constants/items.h"
 #include "difficulty.h"
@@ -209,6 +210,7 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+    QuestMenu_ResetMenuSaveData();
     gSaveBlock3Ptr->followerIndex = OW_FOLLOWER_NOT_SET;
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     ResetItemFlags();
