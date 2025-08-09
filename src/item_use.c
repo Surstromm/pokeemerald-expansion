@@ -1618,5 +1618,4 @@ void ItemUseOutOfBattle_TownMap(u8 taskId)
 
 
 
-
 #undef tUsingRegisteredKeyItem
