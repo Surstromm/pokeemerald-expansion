@@ -1615,6 +1615,21 @@ void ItemUseOutOfBattle_TownMap(u8 taskId)
     }
 } 
 
+void ItemUseOutOfBattle_DexNav (u8 taskId)
+{
+    if (!gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        sItemUseOnFieldCB = Task_OpenDexNavFromStartMenu;
+        gFieldCallback = FieldCB_UseItemOnField;
+        gBagMenu->newScreenCallback = CB2_ReturnToField;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else {
+        sItemUseOnFieldCB = Task_OpenDexNavFromStartMenu;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+
+}
 
 
 
