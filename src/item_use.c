@@ -46,6 +46,7 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/map_types.h"
+#include "dexnav.h"
 
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
@@ -1612,6 +1613,10 @@ void ItemUseOutOfBattle_TownMap(u8 taskId)
         // TODO: handle key items with callbacks to menus allow to be used by registering them.
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
     }
-}
+} 
+
+
+
+
 
 #undef tUsingRegisteredKeyItem

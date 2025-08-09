@@ -12445,18 +12445,18 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_WailmerPail,
     },
 
-    [ITEM_POKE_RADAR] =
+    [ITEM_DEXNAV] =
     {
-        .name = _("Poké Radar"),
+        .name = _("DexNav"),
         .price = 0,
         .description = COMPOUND_STRING(
             "A tool used to\n"
             "search out Pokémon\n"
-            "hiding in grass."),
+            "hiding in the wild."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_DexNav,
         .iconPic = gItemIcon_PokeRadar,
         .iconPalette = gItemIconPalette_PokeRadar,
     },
