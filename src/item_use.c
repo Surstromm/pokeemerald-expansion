@@ -48,6 +48,7 @@
 #include "constants/map_types.h"
 #include "dexnav.h"
 
+
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
 static void Task_CallItemUseOnFieldCallback(u8);
@@ -157,6 +158,12 @@ static void SetUpItemUseOnFieldCallback(u8 taskId)
 static void FieldCB_UseItemOnField(void)
 {
     FadeInFromBlack();
+    CreateTask(Task_CallItemUseOnFieldCallback, 8);
+}
+
+static void FieldCB_UseItemOnFieldNoFadeIn(void)
+{
+    //FadeInFromBlack();
     CreateTask(Task_CallItemUseOnFieldCallback, 8);
 }
 
@@ -1608,19 +1615,21 @@ void ItemUseOutOfBattle_TownMap(u8 taskId)
         gBagMenu->newScreenCallback = CB2_ReturnToField;
         Task_FadeAndCloseBagMenu(taskId);
     }
-    else
+    else    
     {
         // TODO: handle key items with callbacks to menus allow to be used by registering them.
+
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
     }
 } 
+
 
 void ItemUseOutOfBattle_DexNav (u8 taskId)
 {
     if (!gTasks[taskId].tUsingRegisteredKeyItem)
     {
         sItemUseOnFieldCB = Task_OpenDexNavFromStartMenu;
-        gFieldCallback = FieldCB_UseItemOnField;
+        gFieldCallback = FieldCB_UseItemOnFieldNoFadeIn;
         gBagMenu->newScreenCallback = CB2_ReturnToField;
         Task_FadeAndCloseBagMenu(taskId);
     }
