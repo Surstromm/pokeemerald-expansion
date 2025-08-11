@@ -12510,18 +12510,18 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_PokeFlute,
     },
 
-    [ITEM_FAME_CHECKER] =
+    [ITEM_POKENAV] =
     {
-        .name = _("Fame Checker"),
+        .name = _("PokéNav"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Stores information\n"
-            "on famous people\n"
-            "for instant recall."),
+            "A handy tool\n"
+            "for trainers\n"
+            "in Hoenn."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_PokeNav,
         .iconPic = gItemIcon_FameChecker,
         .iconPalette = gItemIconPalette_FameChecker,
     },

@@ -47,7 +47,7 @@
 #include "constants/songs.h"
 #include "constants/map_types.h"
 #include "dexnav.h"
-
+#include "pokenav.h"
 
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
@@ -1640,6 +1640,22 @@ void ItemUseOutOfBattle_DexNav (u8 taskId)
 
 }
 
+
+void ItemUseOutOfBattle_PokeNav (u8 taskId)
+{
+    if (!gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        sItemUseOnFieldCB = POKENAV_MENU_TYPE_DEFAULT;
+        gFieldCallback = FieldCB_UseItemOnFieldNoFadeIn;
+        gBagMenu->newScreenCallback = CB2_ReturnToField;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else {
+        sItemUseOnFieldCB = POKENAV_MENU_TYPE_DEFAULT;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+
+}
 
 
 #undef tUsingRegisteredKeyItem
