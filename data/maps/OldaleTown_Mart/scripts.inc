@@ -20,6 +20,7 @@ OldaleTown_Mart_Pokemart_Basic:
 	.2byte ITEM_AWAKENING
 	.2byte ITEM_DEXNAV
 	.2byte ITEM_POKENAV
+	.2byte ITEM_POKEDEX
 	pokemartlistend
 
 OldaleTown_Mart_ExpandedItems::
