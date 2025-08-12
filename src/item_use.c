@@ -83,6 +83,7 @@ static void CB2_OpenPokeblockFromBag(void);
 static void ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
 
+
 static const u8 sText_CantDismountBike[] = _("You can't dismount your Bike here.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe Itemfinder's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderOnTop[] = _("Oh!\nThe Itemfinder's shaking wildly!{PAUSE_UNTIL_PRESS}");
@@ -1640,21 +1641,39 @@ void ItemUseOutOfBattle_DexNav (u8 taskId)
 
 }
 
-
-void ItemUseOutOfBattle_PokeNav (u8 taskId)
+static void Task_BeginPokenav_Wait(u8 taskId)
 {
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2(CB2_InitPokeNav);
+        DestroyTask(taskId);
+    }
+}
+
+static void Task_BeginPokenav(u8 taskId)
+{
+    // Dit deel wordt uitgevoerd wanneer het item vanuit de tas is gebruikt.
     if (!gTasks[taskId].tUsingRegisteredKeyItem)
     {
-        sItemUseOnFieldCB = POKENAV_MENU_TYPE_DEFAULT;
-        gFieldCallback = FieldCB_UseItemOnFieldNoFadeIn;
-        gBagMenu->newScreenCallback = CB2_ReturnToField;
+        // Sluit de tas. Task_FadeAndCloseBagMenu handelt de fade-out af.
         Task_FadeAndCloseBagMenu(taskId);
+        // We zetten de volgende functie van de huidige taak op de wachter.
+        gTasks[taskId].func = Task_BeginPokenav_Wait;
     }
-    else {
-        sItemUseOnFieldCB = POKENAV_MENU_TYPE_DEFAULT;
-        SetUpItemUseOnFieldCallback(taskId);
+    // Dit deel wordt uitgevoerd wanneer het item via een sneltoets is gebruikt.
+    else
+    {
+        // Start de fade direct en laat de wachter het overnemen.
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0x0000);
+        gTasks[taskId].func = Task_BeginPokenav_Wait;
     }
+}
 
+void ItemUseOutOfBattle_PokeNav(u8 taskId)
+{
+    // De game-engine heeft al bepaald of het item vanuit de tas of een sneltoets komt.
+    // De taak is al gecreëerd, dus we hoeven alleen de taakfunctie te wijzigen.
+    gTasks[taskId].func = Task_BeginPokenav;
 }
 
 
