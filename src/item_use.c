@@ -1652,18 +1652,13 @@ static void Task_BeginPokenav_Wait(u8 taskId)
 
 static void Task_BeginPokenav(u8 taskId)
 {
-    // Dit deel wordt uitgevoerd wanneer het item vanuit de tas is gebruikt.
     if (!gTasks[taskId].tUsingRegisteredKeyItem)
     {
-        // Sluit de tas. Task_FadeAndCloseBagMenu handelt de fade-out af.
         Task_FadeAndCloseBagMenu(taskId);
-        // We zetten de volgende functie van de huidige taak op de wachter.
         gTasks[taskId].func = Task_BeginPokenav_Wait;
     }
-    // Dit deel wordt uitgevoerd wanneer het item via een sneltoets is gebruikt.
     else
     {
-        // Start de fade direct en laat de wachter het overnemen.
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0x0000);
         gTasks[taskId].func = Task_BeginPokenav_Wait;
     }
@@ -1671,8 +1666,6 @@ static void Task_BeginPokenav(u8 taskId)
 
 void ItemUseOutOfBattle_PokeNav(u8 taskId)
 {
-    // De game-engine heeft al bepaald of het item vanuit de tas of een sneltoets komt.
-    // De taak is al gecreëerd, dus we hoeven alleen de taakfunctie te wijzigen.
     gTasks[taskId].func = Task_BeginPokenav;
 }
 
