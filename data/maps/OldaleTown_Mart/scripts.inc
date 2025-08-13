@@ -21,6 +21,7 @@ OldaleTown_Mart_Pokemart_Basic:
 	.2byte ITEM_DEXNAV
 	.2byte ITEM_POKENAV
 	.2byte ITEM_POKEDEX
+	.2byte ITEM_TRAINER_CARD
 	pokemartlistend
 
 OldaleTown_Mart_ExpandedItems::

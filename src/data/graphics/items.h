@@ -2102,3 +2102,6 @@ const u16 gItemIconPalette_TwiceSpicedRadish[] = INCBIN_U16("graphics/items/icon
 
 const u32 gItemIcon_PokeDex[] = INCBIN_U32("graphics/items/icons/pokedex.4bpp.lz");
 const u16 gItemIconPalette_PokeDex[] = INCBIN_U16("graphics/items/icon_palettes/pokedex.gbapal");
+
+const u32 gItemIcon_TrainerCard[] = INCBIN_U32("graphics/items/icons/trainer_card.4bpp.lz");
+const u16 gItemIconPalette_TrainerCard[] = INCBIN_U16("graphics/items/icon_palettes/trainer_card.gbapal");
