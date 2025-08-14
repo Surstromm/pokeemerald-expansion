@@ -48,6 +48,9 @@
 #include "constants/map_types.h"
 #include "dexnav.h"
 #include "pokenav.h"
+#include "trainer_card.h"
+#include "union_room.h"
+#include "frontier_pass.h"
 
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
@@ -1669,5 +1672,20 @@ void ItemUseOutOfBattle_PokeNav(u8 taskId)
     gTasks[taskId].func = Task_BeginPokenav;
 }
 
+static void ShowTrainerCardCallback(void)
+{
+    if (IsOverworldLinkActive() || InUnionRoom())
+        ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
+    else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
+        ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu);
+    else
+        ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
+}
+
+void ItemUseOutOfBattle_TrainerCard(u8 taskId)
+{
+    gBagMenu->newScreenCallback = ShowTrainerCardCallback;
+    Task_FadeAndCloseBagMenu(taskId);
+}
 
 #undef tUsingRegisteredKeyItem

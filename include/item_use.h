@@ -51,6 +51,7 @@ void ItemUseOutOfBattle_PokeFlute(u8 taskId);
 void ItemUseOutOfBattle_TownMap(u8 taskId);
 void ItemUseOutOfBattle_DexNav(u8 taskId);
 void ItemUseOutOfBattle_PokeNav(u8 taskId);
+void ItemUseOutOfBattle_TrainerCard(u8 taskId);
 
 enum {
     BALL_THROW_UNABLE_TWO_MONS,
