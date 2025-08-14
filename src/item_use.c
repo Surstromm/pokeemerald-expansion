@@ -1629,7 +1629,6 @@ void ItemUseOutOfBattle_TownMap(u8 taskId)
     }
 } 
 
-
 void ItemUseOutOfBattle_DexNav(u8 taskId)
 {
     if (!gTasks[taskId].tUsingRegisteredKeyItem)
