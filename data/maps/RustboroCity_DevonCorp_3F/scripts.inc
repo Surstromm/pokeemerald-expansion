@@ -53,6 +53,7 @@ RustboroCity_DevonCorp_3F_EventScript_MeetPresident::
 	message RustboroCity_DevonCorp_3F_Text_ReceivedPokenav
 	waitfanfare
 	setflag FLAG_SYS_POKENAV_GET
+	giveitem ITEM_POKENAV
 	setflag FLAG_RECEIVED_POKENAV
 	setflag FLAG_HIDE_RUSTBORO_CITY_POKEMON_SCHOOL_SCOTT
 	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp, MSGBOX_DEFAULT

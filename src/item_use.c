@@ -1630,7 +1630,7 @@ void ItemUseOutOfBattle_TownMap(u8 taskId)
 } 
 
 
-void ItemUseOutOfBattle_DexNav (u8 taskId)
+void ItemUseOutOfBattle_DexNav(u8 taskId)
 {
     if (!gTasks[taskId].tUsingRegisteredKeyItem)
     {
@@ -1643,7 +1643,6 @@ void ItemUseOutOfBattle_DexNav (u8 taskId)
         sItemUseOnFieldCB = Task_OpenDexNavFromStartMenu;
         SetUpItemUseOnFieldCallback(taskId);
     }
-
 }
 
 static void Task_BeginPokenav_Wait(u8 taskId)

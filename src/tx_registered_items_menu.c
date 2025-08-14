@@ -181,8 +181,8 @@ static void TxRegItemsMenu_ClearAndInitData(u8 taskId)
     //FreeAndReserveObjectSpritePalettes();
     //AllocSpritePalette(TAG_INDICATOR_ARROWS);
     //LoadPalette(&gBagSwapLineGfx, 432, 16);
-    LoadListMenuSwapLineGfx_RegisteredItemsMenu(); //error here
-    CreateSwapLineSprites_RegisteredItemsMenu(gTxRegItemsMenu->swapLineSpriteIds, SWAP_LINE_LENGTH); //error here
+    LoadListMenuSwapLineGfx_RegisteredItemsMenu();
+    CreateSwapLineSprites_RegisteredItemsMenu(gTxRegItemsMenu->swapLineSpriteIds, SWAP_LINE_LENGTH);
     if (GetFlashLevel() > 0)
     {
         u8 i;
