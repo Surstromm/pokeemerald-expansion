@@ -1675,11 +1675,11 @@ void ItemUseOutOfBattle_PokeNav(u8 taskId)
 static void ShowTrainerCardCallback(void)
 {
     if (IsOverworldLinkActive() || InUnionRoom())
-        ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
+        ShowPlayerTrainerCard(CB2_ReturnToField);
     else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
-        ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu);
+        ShowFrontierPass(CB2_ReturnToField);
     else
-        ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
+        ShowPlayerTrainerCard(CB2_ReturnToField);
 }
 
 void ItemUseOutOfBattle_TrainerCard(u8 taskId)
