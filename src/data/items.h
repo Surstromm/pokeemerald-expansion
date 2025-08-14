@@ -14153,7 +14153,7 @@ const struct Item gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_PokeDex,
         .iconPic = gItemIcon_PokeDex,
         .iconPalette = gItemIconPalette_PokeDex,
     },

@@ -51,6 +51,8 @@
 #include "trainer_card.h"
 #include "union_room.h"
 #include "frontier_pass.h"
+#include "pokedex.h"
+#include "pokedex_plus_hgss.h"
 
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
@@ -1687,5 +1689,19 @@ void ItemUseOutOfBattle_TrainerCard(u8 taskId)
     gBagMenu->newScreenCallback = ShowTrainerCardCallback;
     Task_FadeAndCloseBagMenu(taskId);
 }
+
+static void OpenPokedexCallback(void)
+{
+    IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
+    CleanupOverworldWindowsAndTilemaps();
+    SetMainCallback2(CB2_OpenPokedexPlusHGSS);
+}
+
+void ItemUseOutOfBattle_PokeDex(u8 taskId)
+{
+    gBagMenu->newScreenCallback = OpenPokedexCallback;
+    Task_FadeAndCloseBagMenu(taskId);
+}
+
 
 #undef tUsingRegisteredKeyItem
