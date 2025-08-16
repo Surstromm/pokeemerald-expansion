@@ -1014,3 +1014,16 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "I have something to show you.\n"
 	.string "Let's go to my Lab.$"
 
+LittlerootTown_EventScript_Zinnia::
+	trainerbattle_single TRAINER_ZINNIA, LittlerootTown_Text_ZinniaIntro, LittlerootTown_Text_ZinniaDefeat
+	msgbox LittlerootTown_Text_ZinniaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+LittlerootTown_Text_ZinniaIntro:
+	.string "...$"
+
+LittlerootTown_Text_ZinniaDefeat:
+	.string "...$"
+
+LittlerootTown_Text_ZinniaPostBattle:
+	.string "...$"
