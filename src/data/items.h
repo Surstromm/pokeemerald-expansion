@@ -14154,7 +14154,7 @@ const struct Item gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_TrainerCard,
         .iconPic = gItemIcon_TrainerCard,
         .iconPalette = gItemIconPalette_TrainerCard,
     },
