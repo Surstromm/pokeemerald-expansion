@@ -46,6 +46,7 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/map_types.h"
+#include "pokenav.h"
 
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
@@ -80,6 +81,7 @@ static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
 static void ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
+
 
 static const u8 sText_CantDismountBike[] = _("You can't dismount your Bike here.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe Itemfinder's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
@@ -1612,6 +1614,34 @@ void ItemUseOutOfBattle_TownMap(u8 taskId)
         // TODO: handle key items with callbacks to menus allow to be used by registering them.
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
     }
+}
+
+static void Task_BeginPokenav_Wait(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2(CB2_InitPokeNav);
+        DestroyTask(taskId);
+    }
+}
+
+static void Task_BeginPokenav(u8 taskId)
+{
+    if (!gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        Task_FadeAndCloseBagMenu(taskId);
+        gTasks[taskId].func = Task_BeginPokenav_Wait;
+    }
+    else
+    {
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0x0000);
+        gTasks[taskId].func = Task_BeginPokenav_Wait;
+    }
+}
+
+void ItemUseOutOfBattle_PokeNav(u8 taskId)
+{
+    gTasks[taskId].func = Task_BeginPokenav;
 }
 
 #undef tUsingRegisteredKeyItem

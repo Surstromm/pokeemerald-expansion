@@ -565,6 +565,9 @@ struct RankingHall2P
     //u8 padding;
 };
 
+// quest menu
+#include "constants/quests.h"
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
@@ -603,7 +606,14 @@ struct SaveBlock2
 #endif //FREE_RECORD_MIXING_HALL_RECORDS
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
-}; // sizeof=0xF2C
+
+#define QUEST_FLAGS_COUNT ROUND_BITS_TO_BYTES(QUEST_COUNT)
+#define SUB_FLAGS_COUNT ROUND_BITS_TO_BYTES(SUB_QUEST_COUNT)
+#define QUEST_STATES 5 //Number of different quest states tracked in the saveblock
+
+    u8 questData[QUEST_FLAGS_COUNT * QUEST_STATES];
+    u8 subQuests[SUB_FLAGS_COUNT];
+}; 
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
@@ -657,6 +667,11 @@ struct ItemSlot
 {
     u16 itemId;
     u16 quantity;
+};
+
+struct RegisteredItemSlot
+{
+    u16 itemId;
 };
 
 struct Pokeblock
@@ -1003,6 +1018,7 @@ struct MysteryGiftSave
     u32 trainerIds[2][5]; // Saved ids for 10 trainers, 5 each for battles and trades
 }; // 0x36C 0x3598
 
+
 // For external event data storage. The majority of these may have never been used.
 // In Emerald, the only known used fields are the PokeCoupon and BoxRS ones, but hacking the distribution discs allows Emerald to receive events and set the others
 struct ExternalEventData
@@ -1069,7 +1085,7 @@ struct SaveBlock1
     /*0x238*/ struct Pokemon playerParty[PARTY_SIZE];
     /*0x490*/ u32 money;
     /*0x494*/ u16 coins;
-    /*0x496*/ u16 registeredItem; // registered for use with SELECT button
+    /*0x496*/ u16 registeredItemSelect; // registered for use with SELECT button    
     /*0x498*/ struct ItemSlot pcItems[PC_ITEMS_COUNT];
     /*0x560*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     /*0x5D8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
@@ -1160,7 +1176,10 @@ struct SaveBlock1
     /*0x3???*/ struct TrainerHillSave trainerHill;
 #endif //FREE_TRAINER_HILL
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
-    // sizeof: 0x3???
+               u8 registeredItemLastSelected:4; //max 16 items
+               u8 registeredItemListCount:4;
+               struct RegisteredItemSlot registeredItems[REGISTERED_ITEMS_MAX];
+    /* size = 0x3??? */
 };
 
 extern struct SaveBlock1 *gSaveBlock1Ptr;

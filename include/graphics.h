@@ -1739,6 +1739,8 @@ extern const u32 gItemIcon_SwapSnack[];
 extern const u16 gItemIconPalette_SwapSnack[];
 extern const u32 gItemIcon_TwiceSpicedRadish[];
 extern const u16 gItemIconPalette_TwiceSpicedRadish[];
+extern const u32 gItemIcon_TrainerCard[];
+extern const u16 gItemIconPalette_TrainerCard[];
 
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u16 gItemIconPalette_ReturnToFieldArrow[];
@@ -2041,6 +2043,7 @@ extern const u16 gBattleInterface_BallDisplayPal[];
 
 extern const u32 gSwapLineGfx[];
 extern const u16 gSwapLinePal[];
+extern const u32 gSwapLineGfx_RegisteredItemsMenu[];
 
 extern const u32 gBattlePyramidBag_Gfx[];
 extern const u16 gBattlePyramidBag_Pal[];

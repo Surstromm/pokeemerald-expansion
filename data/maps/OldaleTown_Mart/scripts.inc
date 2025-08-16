@@ -18,6 +18,8 @@ OldaleTown_Mart_Pokemart_Basic:
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_AWAKENING
+	.2byte ITEM_POKENAV
+	.2byte ITEM_TRAINER_CARD
 	pokemartlistend
 
 OldaleTown_Mart_ExpandedItems::

@@ -546,7 +546,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::
 	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex
 	waitfanfare
 	setflag FLAG_SYS_POKEDEX_GET
-	setflag FLAG_DEXNAV_GET
 	special SetUnlockedPokedexFlags
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
 	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 1
@@ -738,15 +737,15 @@ LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex:
 	.string "for a long time.\p"
 	.string "{RIVAL} has an extensive history as\n"
 	.string "a Trainer already.\p"
-	.string "Here, {PLAYER}{KUN}, I ordered these for my\n"
+	.string "Here, {PLAYER}{KUN}, I ordered this for my\n"
 	.string "research, but I think you should have\l"
-	.string "this Pokédex and DexNav.$"
+	.string "this Pokédex.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex:
-	.string "{PLAYER} received the Pokédex and DexNav!$"
+	.string "{PLAYER} received the Pokédex!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex:
-	.string "Prof. Birch: These are high-tech\n"
+	.string "Prof. Birch: The Pokédex is a high-tech\n"
 	.string "tools that automatically make a record\l"
 	.string "of any Pokémon you meet or catch.\p"
 	.string "My kid, {RIVAL}, goes everywhere\n"

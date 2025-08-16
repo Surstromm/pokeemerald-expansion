@@ -44,10 +44,12 @@
 #include "berry_powder.h"
 #include "mystery_gift.h"
 #include "union_room_chat.h"
+#include "quests.h"
 #include "constants/map_groups.h"
 #include "constants/items.h"
 #include "difficulty.h"
 #include "follower_npc.h"
+#include "tx_registered_items_menu.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -187,9 +189,10 @@ void NewGameInitData(void)
     ZeroPlayerPartyMons();
     ResetPokemonStorageSystem();
     DeactivateAllRoamers();
-    gSaveBlock1Ptr->registeredItem = ITEM_NONE;
+    gSaveBlock1Ptr->registeredItemSelect = ITEM_NONE;    
     ClearBag();
     NewGameInitPCItems();
+    TxRegItemsMenu_RegisteredItemsMenuNewGame();
     ClearPokeblocks();
     ClearDecorationInventories();
     InitEasyChatPhrases();
@@ -209,6 +212,7 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+    QuestMenu_ResetMenuSaveData();
     gSaveBlock3Ptr->followerIndex = OW_FOLLOWER_NOT_SET;
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     ResetItemFlags();
