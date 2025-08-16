@@ -1741,6 +1741,8 @@ extern const u32 gItemIcon_TwiceSpicedRadish[];
 extern const u16 gItemIconPalette_TwiceSpicedRadish[];
 extern const u32 gItemIcon_TrainerCard[];
 extern const u16 gItemIconPalette_TrainerCard[];
+extern const u32 gItemIcon_Pokedex[];
+extern const u16 gItemIconPalette_Pokedex[];
 
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u16 gItemIconPalette_ReturnToFieldArrow[];

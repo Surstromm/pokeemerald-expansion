@@ -14159,4 +14159,21 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_TrainerCard,
     },
 
+        [ITEM_POKEDEX] =
+    {
+        .name = _("Pokédex"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A portable\n"
+            "encyclopedia\n"
+            "for all Pokémon."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Pokedex,
+        .iconPic = gItemIcon_Pokedex,
+        .iconPalette = gItemIconPalette_Pokedex,
+    },
+
+
 };

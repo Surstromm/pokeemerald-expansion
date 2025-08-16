@@ -51,6 +51,7 @@
 #include "union_room.h"
 #include "frontier_pass.h"
 #include "link.h"
+#include "pokedex_plus_hgss.h"
 
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
@@ -1662,6 +1663,24 @@ static void ShowTrainerCardCallback(void)
 void ItemUseOutOfBattle_TrainerCard(u8 taskId)
 {
     gBagMenu->newScreenCallback = ShowTrainerCardCallback;
+    Task_FadeAndCloseBagMenu(taskId);
+}
+
+// Callback om het Pokédex-scherm te starten.
+static void ShowPokedexCallback(void)
+{
+    // Aangezien je de Pokedex Plus-code hebt meegeleverd,
+    // gaan we ervan uit dat dit de functie is die je wilt aanroepen.
+    // De conditional check is overbodig en veroorzaakte fouten.
+    CB2_OpenPokedexPlusHGSS();
+}
+
+// Functie om het Pokédex-item vanuit de tas te gebruiken.
+void ItemUseOutOfBattle_Pokedex(u8 taskId)
+{
+    // Stelt de callback in die wordt uitgevoerd nadat het huidige menu wordt gesloten.
+    gBagMenu->newScreenCallback = ShowPokedexCallback;
+    // Deze functie handelt het fade-out-effect af en sluit het tasmenu.
     Task_FadeAndCloseBagMenu(taskId);
 }
 
