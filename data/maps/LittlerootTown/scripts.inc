@@ -1021,7 +1021,8 @@ LittlerootTown_EventScript_Zinnia::
 
 LittlerootTown_Text_ZinniaIntro::
 .string "Ahem...\p"
-.string "Do you remember the legend of the Lorekeeper?\n"
+.string "Do you remember the legend\n"
+.string "of the Lorekeeper?\n"
 .string "No? It's fine, I'll teach you... someday.\p"
 .string "But for now, I must see a certain trainer\n"
 .string "to test their resolve.$"
@@ -1036,5 +1037,5 @@ LittlerootTown_Text_ZinniaPostBattle::
 .string "Well, then.\p"
 .string "That's a little bit of a complication,\n"
 .string "isn't it?\p"
-.string "It seems our meeting was a matter of destiny,\n"
-.string "after all.$""
+.string "It seems our meeting was a matter\n"
+.string "of destiny, after all.$"
