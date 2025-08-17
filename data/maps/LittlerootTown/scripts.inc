@@ -1014,36 +1014,27 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "I have something to show you.\n"
 	.string "Let's go to my Lab.$"
 
-// Developer note: test vendor.
-LittlerootTOwn_Mart_EventScript_Clerk::
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_Mart_ExpandedItems
-	pokemart LittlerootTown_Mart_Pokemart_Basic
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
+LittlerootTown_EventScript_Zinnia::
+	trainerbattle_single TRAINER_ZINNIA, LittlerootTown_Text_ZinniaIntro, LittlerootTown_Text_ZinniaDefeated
+	msgbox LittlerootTown_Text_ZinniaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-	.align 2
-LittlerootTown_Mart_Pokemart_Basic:
-	.2byte ITEM_POKEDEX
-	.2byte ITEM_TRAINER_CARD
-	.2byte ITEM_POKENAV
-	pokemartlistend
+LittlerootTown_Text_ZinniaIntro::
+.string "Ahem...\p"
+.string "Do you remember the legend of the Lorekeeper?\n"
+.string "No? It's fine, I'll teach you... someday.\p"
+.string "But for now, I must see a certain trainer\n"
+.string "to test their resolve.$"
 
-LittlerootTown_Mart_ExpandedItems::
-	pokemart LittlerootTown_Mart_Pokemart_Expanded
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
+LittlerootTown_Text_ZinniaDefeated::
+.string "Whoa, whoa, whoa!\p"
+.string "Just what is that astounding power\n"
+.string "you're holding?\p"
+.string "It's much, much stronger than I had thought!$"
 
-	.align 2
-LittlerootTown_Mart_Pokemart_Expanded:
-	.2byte ITEM_POKE_BALL
-	.2byte ITEM_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_AWAKENING
-	pokemartlistend
+LittlerootTown_Text_ZinniaPostBattle::
+.string "Well, then.\p"
+.string "That's a little bit of a complication,\n"
+.string "isn't it?\p"
+.string "It seems our meeting was a matter of destiny,\n"
+.string "after all.$""

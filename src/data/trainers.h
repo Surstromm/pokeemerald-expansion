@@ -42178,3 +42178,37 @@ F_TRAINER_FEMALE |
             },
         },
     },
+#line 16877
+    [DIFFICULTY_NORMAL][TRAINER_ZINNIA] =
+    {
+#line 16878
+        .trainerName = _("Zinnia"),
+#line 16879
+        .trainerClass = TRAINER_CLASS_RIVAL,
+#line 16880
+        .trainerPic = TRAINER_PIC_ZINNIA,
+        .encounterMusic_gender =
+#line 16881
+F_TRAINER_FEMALE | 
+#line 16882
+            TRAINER_ENCOUNTER_MUSIC_FEMALE,
+#line 16883
+        .battleType = TRAINER_BATTLE_TYPE_SINGLES,
+#line 16884
+        .aiFlags = AI_FLAG_BASIC_TRAINER,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 16886
+            .species = SPECIES_WHISMUR,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16888
+            .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
+#line 16887
+            .lvl = 5,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
