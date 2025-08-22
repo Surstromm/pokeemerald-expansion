@@ -54,6 +54,7 @@
 #include "rtc.h"
 #include "event_object_movement.h"
 #include "gba/isagbprint.h"
+#include "quests.h"
 
 /* CALLBACKS */
 static void SpriteCB_IconPoketch(struct Sprite* sprite);
@@ -104,6 +105,7 @@ enum MENU {
   MENU_SAVE,
   MENU_OPTIONS,
   MENU_FLAG,
+  MENU_QUESTS,
 };
 
 enum FLAG_VALUES {
@@ -1338,6 +1340,9 @@ static void HeatStartMenu_OpenMenu(void) {
       break;
     case MENU_OPTIONS:
       DoCleanUpAndChangeCallback(CB2_InitOptionMenu);
+      break;
+    case MENU_QUESTS:
+      DoCleanUpAndChangeCallback(CB2_OpenQuestMenu);
       break;
   }
 }
