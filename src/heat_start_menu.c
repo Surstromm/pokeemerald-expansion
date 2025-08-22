@@ -76,6 +76,7 @@ static void HeatStartMenu_CreateSprites(void);
 static void HeatStartMenu_SafariZone_CreateSprites(void);
 static void HeatStartMenu_LoadBgGfx(void);
 static void HeatStartMenu_ShowTimeWindow(void);
+//static void HeatStartMenu_UpdateClockDisplay(void);
 static void HeatStartMenu_UpdateMenuName(void);
 static u8 RunSaveCallback(void);
 static u8 SaveDoSaveCallback(void);
@@ -83,6 +84,7 @@ static void HideSaveInfoWindow(void);
 static void HideSaveMessageWindow(void);
 static u8 SaveOverwriteInputCallback(void);
 static u8 SaveConfirmOverwriteDefaultNoCallback(void);
+//static u8 SaveConfirmOverwriteCallback(void);
 static void ShowSaveMessage(const u8 *message, u8 (*saveCallback)(void));
 static u8 SaveFileExistsCallback(void);
 static u8 SaveSavingMessageCallback(void);
@@ -136,7 +138,7 @@ struct HeatStartMenu {
 };
 
 static EWRAM_DATA struct HeatStartMenu *sHeatStartMenu = NULL;
-static EWRAM_DATA u8 menuSelected = 0;
+static EWRAM_DATA u8 menuSelected;
 static EWRAM_DATA u8 (*sSaveDialogCallback)(void) = NULL;
 static EWRAM_DATA u8 sSaveDialogTimer = 0;
 static EWRAM_DATA u8 sSaveInfoWindowId = 0;
@@ -146,6 +148,24 @@ static const u32 sStartMenuTiles[] = INCBIN_U32("graphics/heat_start_menu/bg.4bp
 static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/heat_start_menu/bg.bin.lz");
 static const u32 sStartMenuTilemapSafari[] = INCBIN_U32("graphics/heat_start_menu/bg_safari.bin.lz");
 static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/heat_start_menu/bg.gbapal");
+
+// --alternate BG pals--
+static const u16 sStartMenuPalettes[MENU_PAL_COUNT][16] = {
+    INCBIN_U16("graphics/heat_start_menu/bg.gbapal"),
+    INCBIN_U16("graphics/heat_start_menu/bg1.gbapal"),
+    INCBIN_U16("graphics/heat_start_menu/bg2.gbapal"),
+    INCBIN_U16("graphics/heat_start_menu/bg3.gbapal"),
+
+};
+#define MENU_PAL_COUNT 4
+
+const u16 *GetStartMenuPalette(u8 id)
+{
+    if (id >= MENU_PAL_COUNT)
+        return sStartMenuPalettes[0]; // Return the default if ID is out of bounds
+    else
+        return sStartMenuPalettes[id];
+}
 
 //--SPRITE-GFX--
 #define TAG_ICON_GFX 1234
@@ -720,17 +740,23 @@ static void HeatStartMenu_SafariZone_CreateSprites(void) {
 }
 
 static void HeatStartMenu_LoadBgGfx(void) {
-  u8* buf = GetBgTilemapBuffer(0); 
-  LoadBgTilemap(0, 0, 0, 0);
-  DecompressAndCopyTileDataToVram(0, sStartMenuTiles, 0, 0, 0);
-  if (GetSafariZoneFlag() == FALSE) {
-    LZDecompressWram(sStartMenuTilemap, buf);
-  } else {
-    LZDecompressWram(sStartMenuTilemapSafari, buf);
-  }
-  LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
-  LoadPalette(sStartMenuPalette, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
-  ScheduleBgCopyTilemapToVram(0);
+    u8* buf = GetBgTilemapBuffer(0);
+    LoadBgTilemap(0, 0, 0, 0);
+    DecompressAndCopyTileDataToVram(0, sStartMenuTiles, 0, 0, 0); // Keep as sStartMenuTiles (u32)
+    if (GetSafariZoneFlag() == FALSE) {
+        LZDecompressWram(sStartMenuTilemap, buf);
+    } else {
+        LZDecompressWram(sStartMenuTilemapSafari, buf);
+    }
+
+    // Load the standard menu palette
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+
+    // Load the start menu palette based on the persistent setting
+    const u16 *selectedPalette = GetStartMenuPalette(gSaveBlock2Ptr->optionsStartMenuPalette);
+    LoadPalette(selectedPalette, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void HeatStartMenu_ShowTimeWindow(void)
@@ -761,6 +787,44 @@ static void HeatStartMenu_ShowTimeWindow(void)
 	CopyWindowToVram(sHeatStartMenu->sStartClockWindowId, COPYWIN_GFX);
 }
 
+//static void HeatStartMenu_UpdateClockDisplay(void)
+//{
+    //u8 analogHour;
+
+	//if (!FlagGet(FLAG_TEMP_5))
+		//return;
+	//RtcCalcLocalTime();
+    //analogHour = (gLocalTime.hours >= 13 && gLocalTime.hours <= 24) ? gLocalTime.hours - 12 : gLocalTime.hours;
+    
+	//StringCopy(gStringVar3, gDayNameStringsTable[(gLocalTime.days % 7)]);
+    //ConvertIntToDecimalStringN(gStringVar1, gLocalTime.hours, STR_CONV_MODE_LEADING_ZEROS, 2);
+	//ConvertIntToDecimalStringN(gStringVar2, gLocalTime.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+	    //ConvertIntToDecimalStringN(gStringVar1, analogHour, STR_CONV_MODE_LEADING_ZEROS, 2);
+    //if (gLocalTime.hours == 0)
+		//ConvertIntToDecimalStringN(gStringVar1, 12, STR_CONV_MODE_LEADING_ZEROS, 2);
+    //if (gLocalTime.hours == 12)
+		//ConvertIntToDecimalStringN(gStringVar1, 12, STR_CONV_MODE_LEADING_ZEROS, 2);
+
+	//if (gLocalTime.seconds % 2)
+	//{
+        //StringExpandPlaceholders(gStringVar4, gText_CurrentTime);
+            //if (gLocalTime.hours >= 12 && gLocalTime.hours <= 24)
+                //StringExpandPlaceholders(gStringVar4, gText_CurrentTimePM); 
+            //else
+                //StringExpandPlaceholders(gStringVar4, gText_CurrentTimeAM);  
+    //}
+	//else
+	//{
+        //StringExpandPlaceholders(gStringVar4, gText_CurrentTimeOff);
+            //if (gLocalTime.hours >= 12 && gLocalTime.hours <= 24)
+                //StringExpandPlaceholders(gStringVar4, gText_CurrentTimePMOff); 
+            //else
+                //StringExpandPlaceholders(gStringVar4, gText_CurrentTimeAMOff);  
+    //}
+    
+	//AddTextPrinterParameterized(sHeatStartMenu->sStartClockWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
+	//CopyWindowToVram(sHeatStartMenu->sStartClockWindowId, COPYWIN_GFX);
+//}
 
 static const u8 gText_Poketch[] = _("  PokeNav");
 static const u8 gText_Pokedex[] = _("  Pokédex");
@@ -1055,6 +1119,12 @@ static u8 SaveConfirmOverwriteDefaultNoCallback(void)
     return SAVE_IN_PROGRESS;
 }
 
+//static u8 SaveConfirmOverwriteCallback(void)
+//{
+    //DisplayYesNoMenuDefaultYes(); // Show Yes/No menu
+    //sSaveDialogCallback = SaveOverwriteInputCallback;
+    //return SAVE_IN_PROGRESS;
+//}
 
 static void ShowSaveMessage(const u8 *message, u8 (*saveCallback)(void)) {
     StringExpandPlaceholders(gStringVar4, message);
@@ -1126,6 +1196,8 @@ static void ShowSaveInfoWindow(void) {
     u8 color;
     u32 xOffset;
     u32 yOffset;
+    //const u8 *suffix;
+    //u8 *alignedSuffix = gStringVar3;
 
     if (!FlagGet(FLAG_SYS_POKEDEX_GET))
     {
@@ -1246,7 +1318,7 @@ static void DoCleanUpAndStartSafariZoneRetire(void) {
     SafariZoneRetirePrompt();
   }
 }
- 
+
 static void HeatStartMenu_OpenMenu(void) {
   switch (menuSelected) {
     case MENU_POKETCH:
@@ -1332,6 +1404,7 @@ static void Task_HeatStartMenu_HandleMainInput(u8 taskId) {
 
   //HeatStartMenu_UpdateClockDisplay();
   if (JOY_NEW(A_BUTTON)) {
+    PlaySE(SE_SELECT);
     if (sHeatStartMenu->loadState == 0) {
       if (menuSelected != MENU_SAVE) {
         FadeScreen(FADE_TO_BLACK, 0);
