@@ -5,8 +5,8 @@
 
 #define MAX_DECOMPRESSION_BUFFER_SIZE 0x4000
 
-void LZDecompressWram(const u32 *src, void *dest);
-void LZDecompressVram(const u32 *src, void *dest);
+void DecompressDataWithHeaderWram(const u32 *src, void *dest);
+void DecompressDataWithHeaderVram(const u32 *src, void *dest);
 
 u32 IsLZ77Data(const void *ptr, u32 minSize, u32 maxSize);
 

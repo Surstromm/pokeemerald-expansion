@@ -7,12 +7,12 @@
 #include "text.h"
 #include "menu.h"
 
-void LZDecompressWram(const u32 *src, void *dest)
+void DecompressDataWithHeaderWram(const u32 *src, void *dest)
 {
     LZ77UnCompWram(src, dest);
 }
 
-void LZDecompressVram(const u32 *src, void *dest)
+void DecompressDataWithHeaderVram(const u32 *src, void *dest)
 {
     LZ77UnCompVram(src, dest);
 }
@@ -60,7 +60,7 @@ u32 LoadCompressedSpriteSheet(const struct CompressedSpriteSheet *src)
 
 u32 LoadCompressedSpriteSheetOverrideBuffer(const struct CompressedSpriteSheet *src, void *buffer)
 {
-    LZDecompressWram(src->data, buffer);
+    DecompressDataWithHeaderWram(src->data, buffer);
     return DoLoadCompressedSpriteSheet(src, buffer);
 }
 
@@ -134,7 +134,7 @@ void LoadSpecialPokePic(void *dest, s32 species, u32 personality, bool8 isFrontP
     }
 }
 
-void Unused_LZDecompressWramIndirect(const void **src, void *dest)
+void Unused_DecompressDataWithHeaderWramIndirect(const void **src, void *dest)
 {
     LZ77UnCompWram(*src, dest);
 }
