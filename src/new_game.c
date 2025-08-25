@@ -33,6 +33,7 @@
 #include "save.h"
 #include "link_rfu.h"
 #include "main.h"
+#include "event_data.h"
 #include "contest.h"
 #include "item_menu.h"
 #include "pokemon_storage_system.h"
@@ -132,6 +133,7 @@ static void ClearFrontierRecord(void)
 static void WarpToTruck(void)
 {
     SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+    VarSet(VAR_DIFFICULTY, 1);
     WarpIntoMap();
 }
 
