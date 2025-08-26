@@ -113,7 +113,7 @@ static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
 static bool8 QuestMenuCallback(void);
 static bool8 StartMenuDebugCallback(void);
-static bool8 StartMenuDexNavCallback(void);
+//static bool8 StartMenuDexNavCallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -632,29 +632,13 @@ static bool8 HandleStartMenuInput(void)
     if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
-        if (sStartMenuCursorPos == 0)
-        {
-            sStartMenuCursorPos = sNumStartMenuActions - 1;
-            InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
-        }
-        else
-        {
-            sStartMenuCursorPos = Menu_MoveCursor(-1);
-        }
+        sStartMenuCursorPos = Menu_MoveCursor(-1);
     }
 
     if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
-        if (sStartMenuCursorPos == sNumStartMenuActions - 1)
-        {
-            sStartMenuCursorPos = 0;
-            InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
-        }
-        else
-        {
-            sStartMenuCursorPos = Menu_MoveCursor(1);
-        }
+        sStartMenuCursorPos = Menu_MoveCursor(1);
     }
 
     if (JOY_NEW(A_BUTTON))
@@ -1522,11 +1506,11 @@ static bool8 QuestMenuCallback(void)
     return TRUE;
 }
 
-static bool8 StartMenuDexNavCallback(void)
-{
-    CreateTask(Task_OpenDexNavFromStartMenu, 0);
-    return TRUE;
-}
+//static bool8 StartMenuDexNavCallback(void)
+//{
+    //CreateTask(Task_OpenDexNavFromStartMenu, 0);
+    //return TRUE;
+//}
 
 void Script_ForceSaveGame(struct ScriptContext *ctx)
 {
